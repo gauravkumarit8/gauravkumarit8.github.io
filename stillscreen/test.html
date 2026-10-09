@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help test Stillscreen</title>
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --bg: #EAF0F1; --text: #14323A; --accent: #2E7D7A; --line: #B9C7CB;
+    --btn-bg: #14323A; --btn-text: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0F2329; --text: #E3ECEE; --accent: #62B5B0; --line: #2C464E;
+      --btn-bg: #62B5B0; --btn-text: #0F2329;
+    }
+  }
+  html { background: var(--bg); }
+  body {
+    margin: 0 auto; max-width: 38rem; padding: 2rem 1.25rem 4rem;
+    font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--text); background: var(--bg);
+  }
+  h1 { font-size: 1.8rem; line-height: 1.2; margin: 0 0 .5rem; }
+  .lead { margin: 0 0 1.5rem; }
+  .step { border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.1rem; margin: 0 0 1rem; }
+  .step h2 { font-size: 1.05rem; margin: 0 0 .35rem; }
+  .step h2 span { color: var(--accent); margin-right: .4rem; }
+  .step p { margin: 0 0 .75rem; }
+  a.btn {
+    display: inline-block; padding: .7rem 1.2rem; border-radius: 999px;
+    background: var(--btn-bg); color: var(--btn-text); text-decoration: none; font-weight: 600;
+  }
+  .note { border-left: 3px solid var(--accent); padding: .1rem 0 .1rem .9rem; margin: 1.5rem 0; }
+  details { margin-top: 2rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+  summary { cursor: pointer; font-weight: 600; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<h1>Help test Stillscreen</h1>
+<p class="lead">Stillscreen is a focus app that helps you put your phone down. It is not on
+the Play Store yet, and I need testers for about two weeks. It takes two minutes. You need
+an <strong>Android phone</strong>.</p>
+
+<div class="step">
+  <h2><span>1</span>Join the testers group</h2>
+  <p>Sign in with the Google account your Play Store uses, then tap Join group.</p>
+  <a class="btn" href="https://groups.google.com/g/stillscreeb">Join the group</a>
+</div>
+
+<div class="step">
+  <h2><span>2</span>Become a tester</h2>
+  <p>Do this after step 1. On the page that opens, tap &ldquo;Become a tester&rdquo;.</p>
+  <a class="btn" href="https://play.google.com/apps/testing/app.stillscreen.focus">Become a tester</a>
+</div>
+
+<div class="step">
+  <h2><span>3</span>Install the app</h2>
+  <p>On that same page, tap &ldquo;Download it on Google Play&rdquo;, then Install.</p>
+</div>
+
+<div class="note">
+  <p><strong>Please keep the app installed for the whole two weeks</strong> and try a focus
+  session once or twice. If anything feels broken, message me with your phone model.</p>
+</div>
+
+<details>
+  <summary>Hinglish mein</summary>
+  <p>Ye ek focus app hai jo abhi Play Store pe nahi aaya hai. Mujhe lagbhag 2 hafte ke liye
+  testers chahiye. Sirf 2 minute lagenge, aur Android phone chahiye.</p>
+  <ol>
+    <li>Wahi Google account use karo jo tumhare Play Store me hai, aur upar &ldquo;Join the group&rdquo; dabao.</li>
+    <li>Uske baad &ldquo;Become a tester&rdquo; dabao.</li>
+    <li>Wahi page pe &ldquo;Download it on Google Play&rdquo; dabao aur install karo.</li>
+  </ol>
+  <p>App 2 hafte tak installed rakhna aur ek-do baar focus session try karna. Kuch galat lage
+  to apna phone model bata dena.</p>
+</details>
+
+<details>
+  <summary>Trouble?</summary>
+  <ul>
+    <li>&ldquo;Not found&rdquo; or &ldquo;not available&rdquo;: wait a few hours and try again, and check you used the same Google account in steps 1 and 2.</li>
+    <li>&ldquo;You can&rsquo;t become a tester&rdquo;: do step 1 first.</li>
+    <li>Nothing to install: it can take a few hours after you join the group.</li>
+  </ul>
+</details>
+</body>
+</html>
