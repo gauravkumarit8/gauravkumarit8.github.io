@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beat the Bot – Daily brain-training duels against Zed</title>
+<meta name="description" content="Beat the Bot is a quick, offline brain-training game. Duel Zed-9 in reflex, memory, precision and pattern games, and build a daily streak.">
+<meta name="theme-color" content="#0e1325">
+<link rel="canonical" href="https://gauravkumarit8.github.io/beat-the-bot/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%230e1325'/%3E%3Crect x='24' y='36' width='72' height='56' rx='16' fill='%23232c55' stroke='%23b8f34a' stroke-width='4'/%3E%3Ccircle cx='46' cy='62' r='8' fill='%23ff6b5b'/%3E%3Ccircle cx='74' cy='62' r='8' fill='%23ff6b5b'/%3E%3Crect x='46' y='78' width='28' height='5' rx='2.5' fill='%23b8f34a'/%3E%3Crect x='57' y='20' width='6' height='16' fill='%239aa6cc'/%3E%3Ccircle cx='60' cy='19' r='5' fill='%23ff6b5b'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Beat the Bot – Train your brain. Beat Zed.">
+<meta property="og:description" content="Daily brain-training duels in reflex, memory, precision and pattern games. Free and offline.">
+<meta property="og:url" content="https://gauravkumarit8.github.io/beat-the-bot/">
+<meta property="og:image" content="https://gauravkumarit8.github.io/beat-the-bot/feature-graphic.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #0e1325;
+    --card: #1a2140;
+    --card-2: #232c55;
+    --line: #2e3868;
+    --text: #f2f5ff;
+    --muted: #a8b3d8;
+    --lime: #b8f34a;
+    --coral: #ff6b5b;
+    --amber: #ffb547;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  a { color: var(--lime); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* header */
+  header { padding: 18px 0; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.15rem; color: var(--text); text-decoration: none; }
+  nav { display: flex; gap: 20px; font-size: 0.95rem; }
+  nav a { color: var(--muted); text-decoration: none; }
+  nav a:hover { color: var(--text); }
+
+  /* hero */
+  .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; padding: 40px 0 72px; }
+  .eyebrow { color: var(--lime); font-weight: 700; letter-spacing: 0.14em; font-size: 0.8rem; text-transform: uppercase; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.1; margin: 10px 0 16px; }
+  h1 .hl { color: var(--lime); }
+  .lead { color: var(--muted); font-size: 1.15rem; max-width: 34em; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 16px; font-weight: 700; text-decoration: none; font-size: 1rem; }
+  .btn.primary { background: var(--lime); color: #0e1325; }
+  .btn.soon { background: var(--card); color: var(--text); border: 2px dashed var(--line); cursor: default; }
+  .btn.ghost { border: 2px solid var(--line); color: var(--text); }
+  .note { color: var(--muted); font-size: 0.9rem; margin-top: 10px; }
+
+  /* phone mock */
+  .phone { width: 290px; margin: 0 auto; border-radius: 40px; padding: 12px; background: #070a16; border: 2px solid var(--line); box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 10px rgba(184,243,74,0.05); }
+  .screen { background: var(--bg); border-radius: 30px; padding: 22px 16px 18px; display: flex; flex-direction: column; gap: 12px; min-height: 540px; }
+  .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 700; }
+  .chip { background: var(--card); border-radius: 999px; padding: 6px 12px; }
+  .streak { color: var(--amber); }
+  .zed-card { background: var(--card); border-radius: 18px; padding: 12px; display: flex; gap: 12px; align-items: center; }
+  .zed-card b { font-size: 1rem; display: block; }
+  .zed-card span { color: var(--muted); font-size: 0.72rem; line-height: 1.3; display: block; }
+  .tiny { color: var(--muted); font-size: 0.62rem; letter-spacing: 0.1em; }
+  .diff { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .diff i { font-style: normal; font-size: 0.7rem; font-weight: 700; text-align: center; padding: 8px 0; border-radius: 10px; background: var(--card); }
+  .diff i.on { background: var(--lime); color: #0e1325; }
+  .gaunt { background: var(--lime); color: #0e1325; border-radius: 14px; padding: 10px 12px; font-size: 0.78rem; }
+  .gaunt b { display: block; font-size: 0.85rem; }
+  .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mode { background: var(--card); border-radius: 14px; padding: 10px; font-size: 0.8rem; font-weight: 700; min-height: 66px; display: flex; flex-direction: column; justify-content: space-between; }
+  .mode small { color: var(--muted); font-weight: 500; font-size: 0.62rem; }
+  .mode svg { width: 18px; height: 18px; }
+
+  /* sections */
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: clamp(1.6rem, 3.4vw, 2.1rem); margin: 0 0 8px; }
+  .sub { color: var(--muted); max-width: 40em; margin: 0 0 28px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { background: var(--card); border-radius: 20px; padding: 22px; }
+  .card h3 { margin: 12px 0 6px; font-size: 1.1rem; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+  .icon { width: 44px; height: 44px; border-radius: 14px; background: var(--card-2); display: grid; place-items: center; }
+  .icon svg { width: 24px; height: 24px; }
+  .big { font-size: 2rem; font-weight: 800; color: var(--lime); line-height: 1; }
+
+  details { background: var(--card); border-radius: 16px; padding: 16px 20px; margin-bottom: 10px; }
+  summary { cursor: pointer; font-weight: 700; }
+  details p { color: var(--muted); margin: 10px 0 0; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 0.9rem; }
+  footer .links { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 10px; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding-top: 16px; }
+    .grid4 { grid-template-columns: repeat(2, 1fr); }
+    .grid3 { grid-template-columns: 1fr; }
+    nav { display: none; }
+  }
+  @media (max-width: 520px) { .grid4 { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Beat the Bot home">
+      <svg width="40" height="40" viewBox="0 0 120 120" role="img" aria-label="Zed-9, the rival robot">
+        <rect width="120" height="120" rx="26" fill="#1a2140"/>
+        <rect x="24" y="36" width="72" height="56" rx="16" fill="#232c55" stroke="#b8f34a" stroke-width="4"/>
+        <circle cx="46" cy="62" r="8" fill="#ff6b5b"/><circle cx="74" cy="62" r="8" fill="#ff6b5b"/>
+        <rect x="46" y="78" width="28" height="5" rx="2.5" fill="#b8f34a"/>
+        <rect x="57" y="20" width="6" height="16" fill="#9aa6cc"/><circle cx="60" cy="19" r="5" fill="#ff6b5b"/>
+      </svg>
+      Beat the Bot
+    </a>
+    <nav aria-label="Main">
+      <a href="#games">Games</a>
+      <a href="#daily">Daily habit</a>
+      <a href="#faq">FAQ</a>
+      <a href="privacy/">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow">Free · Offline · Brain training</div>
+      <h1>Think you’re quicker than a <span class="hl">robot</span>?</h1>
+      <p class="lead">Beat the Bot is a quick brain-training game. Every day you duel Zed-9, a talkative rival that learns how you play and always stays just beatable.</p>
+      <div class="cta">
+        <!-- When the app is live, replace this span with:
+             <a class="btn primary" href="YOUR_PLAY_STORE_LINK">Get it on Google Play</a> -->
+        <span class="btn soon" role="note">Coming soon to Google Play</span>
+        <a class="btn ghost" href="#games">See the games</a>
+      </div>
+      <p class="note">Works without internet. No account needed.</p>
+    </div>
+
+    <div class="phone" role="img" aria-label="Preview of the Beat the Bot home screen with rank, streak, difficulty and four game modes">
+      <div class="screen" aria-hidden="true">
+        <div class="row"><span class="chip">SHARP · 140 RP</span><span class="streak">12 day streak</span></div>
+        <div class="zed-card">
+          <svg width="46" height="46" viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#2e3868"/><rect x="26" y="40" width="68" height="52" rx="15" fill="#232c55" stroke="#b8f34a" stroke-width="3"/><circle cx="46" cy="64" r="7" fill="#ff6b5b"/><circle cx="74" cy="64" r="7" fill="#ff6b5b"/><rect x="47" y="78" width="26" height="4" rx="2" fill="#b8f34a"/></svg>
+          <div><b>ZED-9</b><span>“Pick a game. I’ll pick your weakness.”</span></div>
+        </div>
+        <div class="gaunt"><b>DAILY GAUNTLET</b>4 games. Same puzzles for everyone today.</div>
+        <div class="tiny">DIFFICULTY</div>
+        <div class="diff"><i>Easy</i><i>Medium</i><i>Hard</i><i class="on">Auto</i></div>
+        <div class="tiny">PICK YOUR BATTLE</div>
+        <div class="modes">
+          <div class="mode"><svg viewBox="0 0 24 24" fill="none" stroke="#b8f34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Reflex<br><small>Zed: strong</small></span></div>
+          <div class="mode"><svg viewBox="0 0 24 24" fill="none" stroke="#b8f34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Memory<br><small>Zed: weak spot</small></span></div>
+          <div class="mode"><svg viewBox="0 0 24 24" fill="none" stroke="#b8f34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg><span>Precision<br><small>Zed: average</small></span></div>
+          <div class="mode"><svg viewBox="0 0 24 24" fill="none" stroke="#b8f34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-6 5-6 9 0s6 6 9 0"/></svg><span>Pattern<br><small>Zed: tricky</small></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="games" aria-labelledby="games-h">
+    <div class="wrap">
+      <h2 id="games-h">Four games, one rival</h2>
+      <p class="sub">Each match takes about a minute. Zed adjusts to you, so every round feels close.</p>
+      <div class="grid4">
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#b8f34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+          <h3>Reflex</h3><p>Tap the moment the circle turns green. Tap early and Zed takes the round.</p>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#b8f34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+          <h3>Memory</h3><p>Watch the tiles light up, then repeat the order. Hold more tiles than Zed to win.</p>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#b8f34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></div>
+          <h3>Precision</h3><p>Lock a sweeping marker inside the target zone. Each round gets faster.</p>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#b8f34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12c3-6 5-6 9 0s6 6 9 0"/></svg></div>
+          <h3>Pattern</h3><p>Find the rule in a number sequence and pick what comes next, before time runs out.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="daily" aria-labelledby="daily-h">
+    <div class="wrap">
+      <h2 id="daily-h">Built for a daily habit</h2>
+      <p class="sub">A few minutes a day is all it takes. Skip days and your rank slips, so keep your streak alive.</p>
+      <div class="grid3">
+        <article class="card">
+          <div class="big">4</div>
+          <h3>Daily Gauntlet</h3>
+          <p>All four games in a row, one score out of 1000, with the same puzzles for everyone that day. Copy your result and challenge a friend.</p>
+        </article>
+        <article class="card">
+          <div class="big">5</div>
+          <h3>Ranks and streaks</h3>
+          <p>Climb from Rookie to Legend. A streak freeze protects your rank when life gets busy.</p>
+        </article>
+        <article class="card">
+          <div class="big">4</div>
+          <h3>Your level</h3>
+          <p>Pick Easy, Medium or Hard, or let Auto learn from your wins and losses in each game.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <h2 id="faq-h">Questions</h2>
+      <details>
+        <summary>Is Beat the Bot free?</summary>
+        <p>Yes. The game is free and supported by ads. Rewarded ads, such as earning a streak freeze, are always optional.</p>
+      </details>
+      <details>
+        <summary>Do I need an internet connection?</summary>
+        <p>No. All four games work offline. The internet is only used to load ads when you are connected.</p>
+      </details>
+      <details>
+        <summary>What happens to my data?</summary>
+        <p>Your rank, streak and scores stay on your phone, and there are no accounts. Ads are provided by Google AdMob. Read the full <a href="privacy/">privacy policy</a>.</p>
+      </details>
+      <details>
+        <summary>Which devices does it run on?</summary>
+        <p>Android phones. Check the Google Play listing for the supported versions once the app is live.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="privacy/">Privacy policy</a>
+      <a href="mailto:gaurav954624@gmail.com">Contact: gaurav954624@gmail.com</a>
+    </div>
+    <div>© 2026 grvthakur. Google Play is a trademark of Google LLC.</div>
+  </div>
+</footer>
+
+</body>
+</html>
