@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>https://gauravkumarit8.github.io/</loc>
-<changefreq>monthly</changefreq>
-<priority>1.0</priority>
-</url>
-<url>
-<loc>https://gauravkumarit8.github.io/privacy-policy.html</loc>
-<changefreq>yearly</changefreq>
-<priority>0.3</priority>
-</url>
-<url>
-<loc>https://gauravkumarit8.github.io/stillscreen/privacy-policy.html</loc>
-<changefreq>yearly</changefreq>
-<priority>0.3</priority>
-</url>
-<url>
-<loc>https://gauravkumarit8.github.io/qr-barcode-toolkit/privacy-policy.html</loc>
-<changefreq>yearly</changefreq>
-<priority>0.3</priority>
-</url>
+  <url><loc>https://grvthakur.bid/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <!-- Daily Divine -->
+  <url><loc>https://grvthakur.bid/daily-divine/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://grvthakur.bid/daily-divine/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://grvthakur.bid/daily-divine/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <!-- Expense Tracker -->
+  <url><loc>https://grvthakur.bid/expense-tracker/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://grvthakur.bid/expense-tracker/privacy-policy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <!-- QR & Barcode Toolkit -->
+  <url><loc>https://grvthakur.bid/qr-barcode-toolkit/</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://grvthakur.bid/qr-barcode-toolkit/how-to-make-wifi-qr-code.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://grvthakur.bid/qr-barcode-toolkit/how-to-make-upi-qr-code.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://grvthakur.bid/qr-barcode-toolkit/how-to-scan-many-qr-codes-to-csv.html</loc><lastmod>2026-10-24</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://grvthakur.bid/qr-barcode-toolkit/privacy-policy.html</loc><lastmod>2026-10-24</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <!-- StillScreen -->
+  <url><loc>https://grvthakur.bid/stillscreen/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://grvthakur.bid/stillscreen/privacy-policy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

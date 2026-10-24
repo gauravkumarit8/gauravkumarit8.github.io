@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gauravkumarit8.github.io/sitemap.xml
+Sitemap: https://grvthakur.bid/sitemap.xml
