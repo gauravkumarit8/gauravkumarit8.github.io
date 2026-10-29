@@ -20,4 +20,6 @@
   <!-- Beat the bot -->
   <url><loc>https://grvthakur.bid/beat-the-bot/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://grvthakur.bid/beat-the-bot/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://grvthakur.bid/sitestamp/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://grvthakur.bid/sitestamp/privacy-policy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
