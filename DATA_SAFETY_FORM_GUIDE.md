@@ -8,7 +8,7 @@ or which SDK does what, update this file, then re-check the policy and
 the actual Play Console form against it — in that order.
 
 **Not legal advice** — this is a best-effort mapping to Google Play's
-current public Data Safety documentation as of September 2026, based on
+current public Data Safety documentation as of September 2026, corrected October 31, 2026, based on
 the app's actual manifest, dependencies, and code. Play Console's exact
 question wording and category list can change; treat this as a drafting
 aid to fill the real form faster and more consistently, not a substitute
@@ -18,48 +18,59 @@ for reading the live form yourself before submitting.
 
 ## Does your app collect or share any of the required user data types?
 
-**Yes** — three categories apply. Everything else in Play Console's list
-(Location, Personal info, Messages, Photos/Videos, Audio, Contacts,
-Calendar, App activity beyond what's below, App info and performance,
-Web browsing) should be answered **"No data collected"** — this app has
-no analytics SDK, no crash reporter, no location access, and reads
-notification *content* only for financial alerts (see the Financial info
-row below for how to describe that).
+**Yes**, because of the SDKs the app ships (AdMob, Play Billing), NOT because of
+the user's own transaction data.
 
-### 1. Financial info → "Purchase history"
+**Corrected 2026-10-31.** An earlier version of this guide declared the user's
+own transaction data as "Financial info > Other financial info: collected".
+That was wrong. Google's Data safety help defines "collect" as *transmitting
+data from your app off a user's device*, and says that user data accessed by
+the app and only processed locally on the device does not need to be disclosed.
+The transaction data never leaves the phone (no server, Android cloud backup
+off), so it is NOT declared. Declaring it made the Play listing say the app
+"may collect: Financial info", which contradicts the on-device promise and
+frightens exactly the privacy-minded users this app is for. **Remove that
+row in Play Console.** The privacy policy still explains in detail that the
+data is read and stored on the device.
+
+Everything else in Play Console's list (Messages, Contacts, Location from the
+app itself, Photos, Audio, Web browsing, Personal info, Health) is "No data
+collected". The app has no analytics SDK and no crash reporter of its own.
+
+### 1. Financial info > "Purchase history" (keep as before)
 | Field | Answer |
 |---|---|
 | Collected? | Yes |
 | Shared with third parties? | No |
 | Processed ephemerally? | No |
-| Optional or required? | Optional — only applies if the user starts a Pro subscription |
+| Optional or required? | Optional, only if the user starts a Pro subscription |
 | Purpose(s) | App functionality (managing the subscription) |
-| Data handled by | Google Play Billing — the app receives only a subscription status (active/expired/which tier), never card numbers, UPI IDs, or other payment instrument details |
+| Data handled by | Google Play Billing: the app receives only a subscription status, never card numbers or UPI IDs |
 
-### 2. Financial info → "Other financial info" (the actual transaction data — amount, direction, merchant, category, balance)
-| Field | Answer |
-|---|---|
-| Collected? | Yes |
-| Shared with third parties? | **No** |
-| Processed ephemerally? | No — stored persistently, but only on-device |
-| Optional or required? | Required for the app's core function |
-| Purpose(s) | App functionality only |
-| Data handled by | The app itself, on-device, encrypted (SQLCipher). No backend server exists to send this to. |
+Keep this one. Over-declaring is low risk; under-declaring is the risk. If you
+ever want to remove it, first read Google's current guidance on Play Billing
+and the Data safety form.
 
-**This is the row most worth getting exactly right.** Say "not shared" here
-and mean it — if any future SDK you add ever transmits transaction data
-anywhere, this answer and the policy both need updating before that build
-ships, not after.
+### 2. What the Google Mobile Ads SDK (AdMob) collects: declare these
+The earlier version declared only the Advertising ID. Google's own AdMob page
+("Google Play's data disclosure requirements", developers.google.com/admob/android/play-data-disclosure)
+lists more, and Google says developers are responsible for disclosing what the
+SDK collects. As of that page (checked 2026-10-31) the SDK collects:
 
-### 3. Device or other IDs → "Advertising ID"
-| Field | Answer |
-|---|---|
-| Collected? | Yes |
-| Shared with third parties? | Yes — with Google (AdMob) for ad serving |
-| Processed ephemerally? | Depends on Google's own AdMob declaration — check AdMob's current Data Safety guidance in Play Console when filling this specific sub-field, it's pre-filled/suggested based on your linked AdMob account in most cases |
-| Optional or required? | Optional — only present for free-tier (non-Pro) users; Pro subscribers see no ads and this stops applying to them going forward |
-| Purpose(s) | Advertising or marketing |
-| Data handled by | Google AdMob SDK |
+| Play Console data type | What AdMob collects | Collected | Shared (with Google) | Purposes |
+|---|---|---|---|---|
+| Location > Approximate location | Device IP address, which may be used to estimate general location | Yes | Yes | Advertising or marketing; Analytics; Fraud prevention, security, and compliance |
+| App activity > App interactions | Taps, app launches, video views, ad interactions | Yes | Yes | same |
+| App info and performance > Diagnostics | App and SDK performance information (launch time, hang rate, energy use) | Yes | Yes | same |
+| Device or other IDs | Android advertising ID, app set ID | Yes | Yes | same |
+
+Answer "optional" for these (Google's page says collection can be limited
+through consent and the user's ad-ID controls). Free users only: Pro
+subscribers see no ads. **Do not copy this table blindly:** open Google's AdMob
+page, check the version it describes against the `play-services-ads` version in
+`app/build.gradle` (23.6.0 at the time of writing; that page describes a newer
+SDK, so also consider upgrading), and tick what Play Console itself suggests
+for your linked AdMob account. If the two differ, follow Google's page.
 
 ## Security practices section
 

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Auto Expense Tracker</title>
+<link rel="canonical" href="https://grvthakur.bid/expense-tracker/privacy-policy.html">
 <style>
   body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; max-width: 760px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #222; }
   h1 { font-size: 1.8em; }
@@ -17,7 +18,7 @@
 
 <p><a href="index.html">&larr; Auto Expense Tracker</a></p>
 <h1>Privacy Policy — Auto Expense Tracker</h1>
-<p class="updated">Last updated: September 16, 2026</p>
+<p class="updated">Last updated: October 31, 2026</p>
 
 <p>Auto Expense Tracker ("the app") is an Android app that helps you track
 your spending automatically. This page explains what information the app
@@ -31,9 +32,9 @@ nothing here should contradict what's declared there.</p>
 <p>Your financial transaction data is processed and stored <strong>only on
 your device</strong>, encrypted. We do not operate a server, and your
 transaction history is never uploaded anywhere, ever. The only network
-activity the app performs is talking to Google's own services — for
-optional ads, optional subscriptions, and update checks — none of which
-involve your financial data.</p>
+activity the app performs is talking to Google's own services — for ads
+shown to free users, the optional Pro subscription, and update and review
+prompts — none of which receive your financial transaction data.</p>
 
 <h2>What the app reads</h2>
 <p>With your permission (Android's "Notification Access" setting, which
@@ -41,6 +42,13 @@ you must explicitly grant and can revoke at any time), the app reads the
 text of notifications from your banking, UPI, and default messaging apps,
 specifically to detect transaction alerts (e.g. "Rs.500 debited...",
 "You received Rs.1200...").</p>
+
+<p>When you first turn Notification Access on, the app also looks once at
+the bank and UPI alerts that are already sitting in your notification
+shade, using exactly the same filter and the same extraction as for a new
+alert, so that your first screen is not empty. It does not read your older
+notifications or messages beyond what is currently in the shade, and it
+does not do this again on later reconnects.</p>
 
 <p>Banks send these alerts from a registered sender code (e.g. "HDFCBK"),
 not a normal app or contact name. To detect alerts from banks that aren't
@@ -64,7 +72,10 @@ unrelated to financial transaction alerts.</p>
 
 <p>The original notification text itself is <strong>discarded immediately</strong>
 after these details are extracted. It is never saved to disk, never
-logged, and never leaves your device.</p>
+logged in the version of the app you download from Google Play, and never
+leaves your device. The one thing kept that is derived from it is a
+one-way fingerprint (a SHA-256 hash), used only so the same alert is not
+recorded twice.</p>
 
 <p>The app does <strong>not</strong> use SMS permissions of any kind. It
 never requests <code>READ_SMS</code> or <code>RECEIVE_SMS</code>.
@@ -76,19 +87,41 @@ category, your own notes/tags) are stored in an encrypted database on
 your device, using industry-standard encryption (SQLCipher) with a key
 held in your device's own secure hardware (Android Keystore) where
 available. This data is never transmitted off your device — there is no
-backend server for this app to send it to.</p>
+backend server for this app to send it to. Android's automatic cloud
+backup and device-to-device transfer are turned off for this app, so your
+data is not copied to your Google account or to a new phone behind your back.</p>
 
-<p>You can export your data at any time (JSON backup, or CSV for
-spreadsheet use) directly to a location you choose on your own device or
-cloud storage — this is an action you take deliberately; the app does not
-do this automatically or without your action.</p>
+<p>The app also keeps, on your device only, the things you set up or do in it:
+your budgets, bill reminders, balances you typed in by hand, the category
+you chose for a merchant ("always use this category for this merchant"),
+your recent searches, your display and notification preferences, and a
+small counter of how many times this month you have used a free export or
+import (see below).</p>
 
-<p>You can permanently delete all app data at any time from Settings.</p>
+<p>The optional home-screen widget shows this month's totals from that same
+on-device data. Anyone who can see your home screen can see the widget, so
+remove it if that matters to you.</p>
+
+<h2>Exports, backups and imports</h2>
+<p>You can export your data at any time: a JSON backup, a CSV file for
+spreadsheets, or a PDF report for a day, month or year. You choose where
+the file is saved, using Android's own file picker. This is an action you
+take deliberately; the app does not do it automatically or without your
+action.</p>
+<p><strong>These exported files are not encrypted.</strong> Anyone who can
+open the file can read it, so save it somewhere you trust and delete it
+when you no longer need it. Likewise you can import a backup or a CSV
+file (including a bank statement CSV) by choosing the file yourself; it is
+read on your device and not uploaded anywhere.</p>
+<p>You can permanently delete all app data at any time from Settings. This
+erases your transactions, budgets, reminders, hand-entered balances,
+category rules, recent searches and related settings from the app. Files
+you exported yourself stay where you saved them until you delete them.</p>
 
 <h2>What we never do</h2>
 <ul>
   <li>We do not operate a server that receives your transaction data.</li>
-  <li>We do not sell, share, or transmit your financial data to any third party.</li>
+  <li>We do not sell, share, or transmit your financial transaction data to any third party.</li>
   <li>We do not use your transaction data for advertising targeting.</li>
   <li>We do not read notifications from apps unrelated to financial transactions.</li>
 </ul>
@@ -99,13 +132,21 @@ network access the app has. This is separate from, and does not involve,
 your financial transaction data:</p>
 
 <ul>
-  <li><strong>Google AdMob</strong> (for the free tier's banner ads):
-  collects your device's <strong>Advertising ID</strong> for ad delivery
-  and frequency capping, subject to your ad-consent choice (EEA/UK users
-  are shown a consent form on first launch, per Google's UMP requirements,
-  and can change this choice any time from Settings → Privacy & Ad
-  Consent). This Advertising ID is shared with Google for ad-serving
-  purposes; the app itself does not otherwise share or sell it.</li>
+  <li><strong>Google AdMob</strong> (for ads shown to free users: a banner
+  at the bottom of the screen, a card on the Search screen, and optional
+  short video ads you can choose to watch to unlock a free export or
+  import): the Google Mobile Ads SDK sends data to Google to serve and
+  measure ads and to prevent fraud. According to Google's own disclosure
+  for this SDK, that includes your device's IP address (which can be used to
+  estimate your general location), how you interact with the ads and the app
+  (such as app launches, taps and video views), diagnostic information about
+  the app's performance, and device identifiers such as the
+  <strong>Advertising ID</strong> and an app-set ID. This is subject to your
+  ad-consent choice (users in the EEA and UK are shown a consent form on first
+  launch, per Google's UMP requirements, and everyone can change this choice
+  any time from Settings → Privacy &amp; Ad Consent) and to the Advertising ID
+  controls in your Android settings. Your transaction data is never part of
+  this. Pro subscribers see no ads.</li>
   <li><strong>Google Play Billing</strong> (for the optional Pro
   subscription): processes your <strong>purchase history</strong> for
   this app's subscription only. Payment details (card numbers, UPI IDs,
@@ -124,7 +165,7 @@ data: <a href="https://policies.google.com/privacy">https://policies.google.com/
 <ul>
   <li><strong>Encryption at rest:</strong> your transaction data is encrypted
   on-device (SQLCipher/AES-256) with a key held in Android Keystore hardware
-  where available.</li>
+  where available. Files you export are not encrypted (see above).</li>
   <li><strong>Encryption in transit:</strong> not applicable to your
   financial data — it is never transmitted anywhere. The only network
   traffic this app generates is the Google services above, which use
@@ -132,14 +173,16 @@ data: <a href="https://policies.google.com/privacy">https://policies.google.com/
   <li><strong>Data deletion:</strong> there is no server-side account to
   delete, because there is no server. You can permanently erase all
   locally stored data at any time from Settings → Delete All Data, which
-  takes effect immediately and cannot be undone. Uninstalling the app has
-  the same effect, since nothing is stored anywhere else.</li>
+  takes effect immediately and cannot be undone. Uninstalling the app also
+  removes the data the app stores, since nothing is stored anywhere else;
+  files you exported yourself are the exception, as they are saved where
+  you chose.</li>
 </ul>
 
 <h2>Permissions the app uses, and why</h2>
 <ul>
   <li><strong>Notification access</strong> — to detect bank/UPI transaction alerts, as described above.</li>
-  <li><strong>Notifications (POST_NOTIFICATIONS)</strong> — to show you bill reminders and unusual-spending alerts you've configured.</li>
+  <li><strong>Notifications (POST_NOTIFICATIONS)</strong> — to show you the notifications the app offers: bill reminders, budget warnings, unusual-spending alerts, subscription price-change alerts and, only if you turn them on, a daily check-in and a weekly summary.</li>
   <li><strong>Ignore battery optimizations (request only, never silent)</strong> — the app can ask to be exempted from aggressive battery management, so the notification listener isn't killed in the background and stops capturing transactions. You choose whether to grant this from a dedicated settings screen; nothing happens without you tapping through it.</li>
   <li><strong>Biometric/fingerprint</strong> — only if you turn on the optional app lock feature, to unlock the app.</li>
   <li><strong>Internet &amp; network state</strong> — used only for the Google services described above; never for transmitting your transaction data.</li>
@@ -153,8 +196,9 @@ from children.</p>
 <h2>Your choices</h2>
 <ul>
   <li>You can grant or revoke Notification Access at any time from Android Settings.</li>
-  <li>You can change your ad-consent choice at any time from the app's Settings screen.</li>
+  <li>You can change your ad-consent choice at any time from the app's Settings screen, and reset or limit your Advertising ID in Android Settings.</li>
   <li>You can export or permanently delete all your data at any time from the app's Settings screen.</li>
+  <li>You can switch the daily check-in and weekly summary notifications on or off in the app's Settings screen.</li>
 </ul>
 
 <h2>Changes to this policy</h2>
