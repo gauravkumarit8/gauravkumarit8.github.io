@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<meta name="description" content="Gaurav Kumar, DevOps Engineer in Bengaluru. CI/CD, Docker, Kubernetes, AWS, GitHub Actions, ArgoCD. Also builds Android apps.">
+<title>Gaurav Kumar | DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1020;--bg2:#121a33;--fg:#eef1fb;--mut:#9aa5c7;--line:#243058;--acc:#ffb454;--ok:#3ddc97;--bad:#ff6b6b;--accfg:#1a1205;
+--head:"Sora",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6f7fb;--bg2:#fff;--fg:#0e1530;--mut:#55608a;--line:#d6dcf0;--acc:#b45f00;--ok:#0a8a55;--bad:#c62828;--accfg:#fff}}
+:root[data-theme="light"]{--bg:#f6f7fb;--bg2:#fff;--fg:#0e1530;--mut:#55608a;--line:#d6dcf0;--acc:#b45f00;--ok:#0a8a55;--bad:#c62828;--accfg:#fff}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--head);line-height:1.65;-webkit-font-smoothing:antialiased;font-weight:400}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 clamp(18px,5vw,36px)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:62px;gap:14px}
+.brand{font-family:var(--mono);font-weight:500;text-decoration:none;font-size:.95rem}
+.brand b{color:var(--acc)}
+nav{display:flex;gap:24px}
+nav a{text-decoration:none;color:var(--mut);font-size:.92rem}
+nav a:hover{color:var(--fg)}
+.menu{display:none;background:none;border:1px solid var(--line);color:var(--fg);padding:7px 13px;border-radius:8px;font:inherit;font-size:.88rem;cursor:pointer}
+@media(max-width:760px){.menu{display:block}nav{display:none;position:absolute;left:0;right:0;top:62px;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;gap:0;padding:4px clamp(18px,5vw,36px) 12px}nav.open{display:flex}nav a{padding:13px 0;border-bottom:1px solid var(--line);font-size:1rem}}
+.hero{padding:clamp(48px,9vw,110px) 0 clamp(36px,6vw,70px)}
+.hello{font-family:var(--mono);color:var(--mut);font-size:.9rem;margin:0 0 18px}
+h1{font-size:clamp(2.5rem,8.5vw,5.4rem);line-height:1.02;letter-spacing:-.04em;margin:0 0 20px;font-weight:700}
+.role{font-family:var(--mono);font-size:clamp(1rem,2.6vw,1.4rem);color:var(--acc);min-height:1.7em;margin:0 0 18px}
+.role::after{content:"▍";animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.lead{color:var(--mut);max-width:62ch;font-size:clamp(1rem,2vw,1.15rem);margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;font:500 .95rem var(--head);text-decoration:none;border:1px solid var(--line);background:none;color:var(--fg);cursor:pointer}
+.btn.p{background:var(--acc);color:var(--accfg);border-color:var(--acc);font-weight:600}
+.btn:hover{filter:brightness(1.12)}
+section{padding:clamp(44px,7vw,84px) 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(1.6rem,4.2vw,2.4rem);letter-spacing:-.025em;line-height:1.15;margin:0 0 10px}
+.sub{color:var(--mut);margin:0 0 30px;max-width:62ch}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:44px}
+.stat{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--bg2)}
+.stat strong{display:block;font-size:2rem;letter-spacing:-.03em;color:var(--acc)}
+.stat span{color:var(--mut);font-size:.85rem}
+/* pipeline */
+.pipe{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:clamp(16px,3vw,28px)}
+.stages{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:18px}
+@media(max-width:760px){.stages{grid-template-columns:repeat(2,1fr)}}
+.st{font:500 .82rem var(--mono);padding:12px 8px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--mut);cursor:pointer;text-align:center;transition:.2s}
+.st[data-s="run"]{border-color:var(--acc);color:var(--acc)}
+.st[data-s="ok"]{border-color:var(--ok);color:var(--ok)}
+.st[data-s="fail"]{border-color:var(--bad);color:var(--bad)}
+.st[aria-pressed="true"]{box-shadow:0 0 0 2px var(--line)}
+.detail{color:var(--mut);font-size:.95rem;min-height:3em;margin:0 0 14px}
+.detail b{color:var(--fg)}
+.ctl{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;margin-bottom:16px}
+.ctl label{font-size:.88rem;color:var(--mut);display:flex;gap:8px;align-items:center;cursor:pointer}
+.ctl input{accent-color:var(--acc);width:16px;height:16px}
+.log{font:400 .8rem/1.7 var(--mono);background:#060913;color:#b8c4e8;border-radius:10px;padding:14px;height:180px;overflow:auto;margin:0}
+.log .ok{color:#3ddc97}.log .bad{color:#ff6b6b}.log .w{color:#ffb454}
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.card h3{margin:0;font-size:1.1rem}
+.card p{margin:0;color:var(--mut);font-size:.93rem;flex:1}
+.tag{font:400 .72rem var(--mono);color:var(--acc)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:400 .8rem var(--mono);border:1px solid var(--line);border-radius:99px;padding:5px 13px;background:var(--bg2)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tab{font:500 .85rem var(--head);border:1px solid var(--line);background:none;color:var(--mut);border-radius:99px;padding:8px 16px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
+.links{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.88rem}
+.links a{color:var(--acc);text-decoration:none}
+.links a.s{color:var(--mut)}
+.links a:hover{text-decoration:underline}
+/* timeline */
+.tl{list-style:none;margin:0;padding:0 0 0 22px;border-left:1px solid var(--line)}
+.tl li{position:relative;padding-bottom:26px}
+.tl li::before{content:"";position:absolute;left:-28px;top:9px;width:11px;height:11px;border-radius:50%;background:var(--acc)}
+.tl h3{margin:0;font-size:1.1rem}
+.tl .when{font:400 .8rem var(--mono);color:var(--mut)}
+.tl ul{margin:10px 0 0;padding-left:18px;color:var(--mut);font-size:.94rem}
+.tl li li{padding:0 0 6px;position:static}.tl li li::before{display:none}
+.contact .box{border:1px solid var(--line);border-radius:20px;padding:clamp(24px,5vw,56px);background:var(--bg2)}
+.mail{font:500 clamp(1.05rem,3.6vw,1.8rem) var(--mono);word-break:break-all}
+footer{border-top:1px solid var(--line);padding:24px 0;color:var(--mut);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+/* terminal + plan */
+.term{background:#060913;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.tbar{display:flex;gap:7px;padding:11px 14px;border-bottom:1px solid #1c2440;background:#0b1224}
+.tbar i{width:11px;height:11px;border-radius:50%;background:#2a3566}
+.tout{font:400 .84rem/1.65 var(--mono);color:#b8c4e8;padding:16px;height:300px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.tout .ok{color:#3ddc97}.tout .w{color:#ffb454}.tout .bad{color:#ff6b6b}.tout .u{color:#7fb0ff}
+.trow{display:flex;gap:8px;align-items:center;padding:0 16px 14px;font:400 .88rem var(--mono);color:#ffb454}
+.trow input{flex:1;min-width:0;background:none;border:0;color:#eef1fb;font:inherit;outline:none;padding:6px 0}
+.sugg{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.plan .n{font:500 .8rem var(--mono);color:var(--acc)}
+.banner{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-top:30px;padding:16px 20px;border:1px dashed var(--acc);border-radius:14px;color:var(--mut);font-size:.95rem}
+.rule{font:400 .8rem/1.6 var(--mono);background:#060913;color:#b8c4e8;border-radius:10px;padding:12px;margin:0 0 14px;overflow-x:auto;white-space:pre}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.role::after{animation:none}.st{transition:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+<a class="brand" href="#top">gaurav<b>@</b>devops:~$</a>
+<button class="menu" aria-expanded="false" aria-controls="nav">Menu</button>
+<nav id="nav"><a href="#pipeline">Pipeline</a><a href="#alerts">Alerts</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#terminal">Terminal</a><a href="#projects">Projects</a><a href="#apps">Apps</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main id="top">
+<div class="wrap hero">
+<p class="hello">Bengaluru, India</p>
+<h1>Gaurav Kumar</h1>
+<p class="role" id="role" aria-label="DevOps Engineer"></p>
+<p class="lead">DevOps engineer with 2+ years building CI/CD pipelines, containerized workloads and monitoring for an AI-driven revenue assurance platform. I care about faster releases, steady reliability and security that runs automatically.</p>
+<div class="cta"><a class="btn p" href="#pipeline">Run my pipeline</a><a class="btn" href="#terminal">Try my terminal</a><a class="btn" href="#contact">Get in touch</a></div>
+<div class="stats">
+<div class="stat"><strong>2+</strong><span>years in DevOps and automation</span></div>
+<div class="stat"><strong>60%</strong><span>less manual QA effort</span></div>
+<div class="stat"><strong>350+</strong><span>revenue control points covered</span></div>
+<div class="stat"><strong>70/30</strong><span>automation to manual split</span></div>
+</div>
+</div>
+
+<section id="pipeline"><div class="wrap">
+<h2>Try the pipeline I built</h2>
+<p class="sub">This mirrors my GitHub Actions workflow for a 3-service app on AWS. Click a stage to read what it does, then run it and break it on purpose.</p>
+<div class="pipe">
+<div class="stages" id="stages"></div>
+<p class="detail" id="detail"></p>
+<div class="ctl">
+<button class="btn p" id="run">Run pipeline</button>
+<label><input type="checkbox" id="cve"> Inject critical CVE</label>
+<label><input type="checkbox" id="hc"> Fail health check</label>
+</div>
+<pre class="log" id="log" aria-live="polite">$ waiting for a push to main...</pre>
+</div>
+</div></section>
+
+<section id="alerts"><div class="wrap">
+<h2>Fire an alert</h2>
+<p class="sub">How I wire Prometheus rules to Alertmanager routing. Pick a rule, then trigger it to see it go from pending to firing to resolved.</p>
+<div class="pipe">
+<div class="tabs" id="atabs"></div>
+<pre class="rule" id="arule"></pre>
+<div class="ctl"><button class="btn p" id="arun">Trigger alert</button></div>
+<pre class="log" id="alog" aria-live="polite">$ pick a rule and press trigger</pre>
+</div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+<h2>Skills</h2>
+<p class="sub">Pick a category.</p>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="chips" id="chips"></div>
+</div></section>
+
+<section id="experience"><div class="wrap">
+<h2>Experience</h2>
+<ol class="tl">
+<li><h3>DevOps &amp; Automation Engineer (Test Engineer-1), Synthesis-Systems</h3><span class="when">Jan 2024 to present, Bengaluru</span>
+<ul>
+<li>Product: xfactrs, an AI-driven revenue assurance platform for Quote-to-Cash and Billing.</li>
+<li>Designed Jenkins CI/CD pipelines covering build, automated tests, quality gates and deployment.</li>
+<li>Containerized application and test components with Docker for consistent environments.</li>
+<li>Set up GitOps delivery with ArgoCD on Kubernetes for declarative, version-controlled deployments and easier rollbacks.</li>
+<li>Built Grafana dashboards for application, pipeline and test-execution health.</li>
+<li>Ran workloads on AWS (EC2, S3, IAM) with least-privilege access.</li>
+<li>Automated release tasks with Python and Bash, cutting manual effort and human error.</li>
+<li>Built a Selenium BDD framework from scratch and added it to CI: 60% less manual QA and a 70/30 automation split across 350+ revenue control points.</li>
+<li>Ran JMeter load tests on REST APIs to find bottlenecks before release.</li>
+</ul></li>
+<li><h3>Software Development Engineer Trainee, MountBlue Technologies</h3><span class="when">Oct 2023 to Jan 2024, Bengaluru</span>
+<ul><li>Trained in Java, Spring Boot and full-stack development; worked on backend APIs.</li></ul></li>
+<li><h3>B.Tech, Computer Science and Engineering</h3><span class="when">Heritage Institute of Technology, Kolkata, 2019 to 2023</span></li>
+</ol>
+</div></section>
+
+<section id="terminal"><div class="wrap">
+<h2>Interview me in the terminal</h2>
+<p class="sub">Type a command or tap one below. Try <b>kubectl get pods</b>, <b>argocd app sync</b> or <b>hire</b>.</p>
+<div class="term"><div class="tbar"><i></i><i></i><i></i></div>
+<div class="tout" id="tout" aria-live="polite"></div>
+<div class="trow"><span>$</span><input id="tin" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command" placeholder="type help and press Enter"></div></div>
+<div class="sugg" id="sugg"></div>
+</div></section>
+
+<section id="plan"><div class="wrap">
+<h2>What I would do in your first 30 days</h2>
+<p class="sub">A simple plan I would bring to any team, based on the pipelines I already run.</p>
+<div class="grid plan">
+<article class="card"><span class="n">Week 1</span><h3>Measure before changing</h3><p>Map every pipeline and environment. Baseline deployment frequency, lead time, change failure rate and time to restore.</p></article>
+<article class="card"><span class="n">Weeks 2 and 3</span><h3>Ship quick, safe wins</h3><p>Add image scanning that fails on critical CVEs, Docker layer caching, health-checked releases with automatic rollback, and short-lived OIDC credentials instead of static keys.</p></article>
+<article class="card"><span class="n">Day 30</span><h3>Make it visible</h3><p>Grafana dashboards for pipeline and release health, a runbook for rollbacks, and a short report of what got faster and what is next.</p></article>
+</div>
+<div class="banner"><span>Want to see this applied to your stack? I am happy to do a short walkthrough.</span>
+<a class="btn p" href="mailto:gaurav.kumarit8@gmail.com?subject=Let%27s%20talk%20DevOps&amp;body=Hi%20Gaurav%2C%20I%20saw%20your%20portfolio...">Start a conversation</a></div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+<h2>Projects</h2>
+<div class="grid">
+<article class="card"><span class="tag">GitHub Actions · Docker · AWS ECR · EC2 · Nginx</span><h3>Realtime Chat &amp; Threads: cloud CI/CD</h3>
+<p>Pipeline for a 3-service app (Next.js, Node.js, Python AI). Builds images to ECR, deploys to EC2 with Docker Compose behind Nginx, scans with Trivy, health-checks every release and rolls back automatically. Static AWS keys replaced by OIDC short-lived credentials.</p>
+<div class="links"><a href="https://github.com/gauravkumarit8">GitHub repository</a></div></article>
+<article class="card"><span class="tag">n8n · LLM · Spark · PostgreSQL</span><h3>Autonomous multi-engine AI data agent</h3>
+<p>An n8n agent that turns natural language into PostgreSQL and Spark SQL, with dynamic schema injection for accurate multi-table JOINs and guardrails that block unauthorized DML/DDL and SQL injection.</p>
+<div class="links"><a href="#contact">Ask for a demo</a></div></article>
+<article class="card"><span class="tag">Terraform · AWS VPC · EC2 · Prometheus · Alertmanager · Grafana</span><h3>DevOps lab: infrastructure as code with alerting</h3>
+<p>Terraform builds a VPC, a locked-down security group and an IMDSv2-only EC2 instance. Docker Compose runs Prometheus, Alertmanager, node_exporter and Grafana, with alert rules for downtime, CPU, memory and disk prediction, and severity-based routing.</p>
+<div class="links"><a href="https://github.com/gauravkumarit8/devops-lab">GitHub repository</a></div></article>
+</div></div></section>
+
+<section id="apps"><div class="wrap">
+<h2>Android apps</h2>
+<p class="sub">Beyond DevOps, I build and publish Android apps. Each has its own page and privacy information.</p>
+<div class="grid" id="appgrid"></div>
+</div></section>
+
+<section id="contact" class="contact"><div class="wrap"><div class="box">
+<h2>Let's talk</h2>
+<p class="sub">Open to DevOps and cloud roles where I can improve release speed, reliability and security.</p>
+<p><a class="mail" href="mailto:gaurav.kumarit8@gmail.com">gaurav.kumarit8@gmail.com</a></p>
+<div class="cta"><button class="btn p" id="copy">Copy email</button><a class="btn" href="https://github.com/gauravkumarit8">GitHub</a><a class="btn" href="#">LinkedIn</a></div>
+</div></div></section>
+</main>
+<footer><div class="wrap"><span>© 2026 Gaurav Kumar</span><span>Bengaluru, India</span></div></footer>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+/* nav */
+var b=document.querySelector('.menu'),n=$('nav');
+b.onclick=function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o)};
+n.onclick=function(e){if(e.target.tagName==='A'){n.classList.remove('open');b.setAttribute('aria-expanded',false)}};
+/* typing role */
+var roles=['DevOps Engineer','CI/CD and GitOps','Docker, Kubernetes, AWS','Automation that ships safely'],ri=0,ci=0,del=false,el=$('role');
+var still=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(still){el.textContent=roles[0]}else{(function tick(){var t=roles[ri];ci+=del?-1:1;el.textContent=t.slice(0,ci);var d=del?35:70;
+if(!del&&ci===t.length){del=true;d=1400}else if(del&&ci===0){del=false;ri=(ri+1)%roles.length;d=300}setTimeout(tick,d)})()}
+/* pipeline */
+var S=[['Commit','Push to <b>main</b> or <b>dev</b> triggers GitHub Actions.'],
+['Test','Parallel test jobs run before anything is built.'],
+['Build','Docker images built with layer caching and tagged with the commit SHA.'],
+['Scan','<b>Trivy</b> scans each image and fails the run on critical CVEs.'],
+['Push','Images pushed to <b>AWS ECR</b> using OIDC short-lived credentials and least-privilege IAM. Lifecycle policies control storage.'],
+['Deploy','Deployed to <b>EC2</b> over SSH with Docker Compose behind Nginx. Production needs manual approval.'],
+['Health','Post-deploy health checks. If they fail, the pipeline <b>rolls back</b> to the last known-good image.']];
+var sb=$('stages'),btns=[],busy=false;
+S.forEach(function(s,i){var x=document.createElement('button');x.className='st';x.textContent=s[0];x.setAttribute('aria-pressed',i===0);
+x.onclick=function(){show(i)};sb.appendChild(x);btns.push(x)});
+function show(i){btns.forEach(function(x,j){x.setAttribute('aria-pressed',j===i)});$('detail').innerHTML='<b>'+S[i][0]+':</b> '+S[i][1]}
+show(0);
+var log=$('log');function say(t,c){var d=document.createElement('div');if(c)d.className=c;d.textContent=t;log.appendChild(d);log.scrollTop=log.scrollHeight}
+var sleep=function(ms){return new Promise(function(r){setTimeout(r,still?0:ms)})};
+var msgs=['git push origin main','3 parallel test jobs passed','built 3 images, tag: '+'a1b2c3d','trivy: no critical CVEs found','pushed to ECR (OIDC credentials)','deployed to EC2 via docker compose','health check passed on all services'];
+$('run').onclick=async function(){
+if(busy)return;busy=true;this.disabled=true;log.innerHTML='';btns.forEach(function(x){x.removeAttribute('data-s')});
+say('$ pipeline started','w');
+for(var i=0;i<S.length;i++){var x=btns[i];x.dataset.s='run';show(i);say('> '+S[i][0].toLowerCase()+' ...');await sleep(750);
+if(i===3&&$('cve').checked){x.dataset.s='fail';say('trivy: CRITICAL CVE-2026-XXXX found in base image','bad');say('pipeline failed. Nothing was pushed or deployed.','bad');break}
+if(i===6&&$('hc').checked){x.dataset.s='fail';say('health check failed on api service','bad');say('rolling back to last known-good image...','w');await sleep(800);btns[5].dataset.s='ok';say('rollback complete. Production is healthy.','ok');break}
+x.dataset.s='ok';say(msgs[i],'ok')}
+if(btns.every(function(x){return x.dataset.s==='ok'}))say('pipeline succeeded','ok');
+busy=false;this.disabled=false};
+/* skills */
+var K={'CI/CD and GitOps':['GitHub Actions','Jenkins (declarative)','ArgoCD','Git/GitHub','Maven','Trivy','Quality gates'],
+'Containers':['Docker','Docker Compose','Kubernetes','Nginx reverse proxy'],
+'Cloud':['AWS EC2','AWS ECR','AWS IAM','AWS S3','AWS VPC','OIDC authentication','ECR lifecycle policies'],
+'IaC and Observability':['Terraform','Prometheus','Alertmanager','PromQL','node_exporter','Grafana dashboards'],
+'Monitoring':['Grafana','Log analysis','JIRA','Postman','OpenAPI (Swagger)','Linux'],
+'Languages':['Python','Bash/Shell','Java','SQL (PostgreSQL)','JavaScript'],
+'Testing':['Selenium','TestNG','JUnit','Cucumber (BDD)','Postman','Apache JMeter'],
+'Automation and AI':['n8n','LLM orchestration','Prompt engineering','API integration']};
+var tb=$('tabs'),ch=$('chips'),keys=Object.keys(K);
+function pick(k){Array.prototype.forEach.call(tb.children,function(t){t.setAttribute('aria-selected',t.textContent===k)});
+ch.innerHTML='';K[k].forEach(function(v){var c=document.createElement('span');c.className='chip';c.textContent=v;ch.appendChild(c)})}
+keys.forEach(function(k){var t=document.createElement('button');t.className='tab';t.textContent=k;t.setAttribute('role','tab');t.onclick=function(){pick(k)};tb.appendChild(t)});
+pick(keys[0]);
+/* apps */
+var B='https://grvthakur.bid/';
+var A=[['QR & Barcode Toolkit','QR and barcode utility app.','qr-barcode-toolkit/',[['Privacy','qr-barcode-toolkit/privacy-policy.html']]],
+['Daily Divine','Daily inspiration app with its own terms and privacy pages.','daily-divine/',[['Privacy','daily-divine/privacy.html'],['Terms','daily-divine/terms.html']]],
+['Expense Tracker','Track everyday spending.','expense-tracker/',[['Privacy','expense-tracker/privacy-policy.html']]],
+['StillScreen','Screen-time management and focus.','stillscreen/',[['Privacy','stillscreen/privacy-policy.html']]],
+['Beat The Bot','A game where you take on a bot.','beat-the-bot/',[['Privacy','beat-the-bot/privacy/']]],
+['Site Stamp','Stamp and mark websites.','sitestamp/',[['Privacy','sitestamp/privacy-policy.html']]]];
+var g=$('appgrid');A.forEach(function(a){var c=document.createElement('article');c.className='card';
+c.innerHTML='<h3></h3><p></p><div class="links"><a></a></div>';c.querySelector('h3').textContent=a[0];c.querySelector('p').textContent=a[1];
+var m=c.querySelector('a');m.href=B+a[2];m.textContent='Explore app →';
+a[3].forEach(function(l){var x=document.createElement('a');x.className='s';x.href=B+l[1];x.textContent=l[0];c.querySelector('.links').appendChild(x)});g.appendChild(c)});
+/* alerts */
+var AL=[{n:'High CPU',x:'100 - avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100 > 85',f:'2m',sev:'warning',to:'Slack #alerts',ev:'CPU at 93% on web-1'},
+{n:'Instance down',x:'up == 0',f:'1m',sev:'critical',to:'on-call webhook',ev:'web-1 stopped answering scrapes'},
+{n:'Disk filling up',x:'predict_linear(node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"}[1h], 4 * 3600) < 0',f:'10m',sev:'warning',to:'Slack #alerts',ev:'/ predicted to fill within 4 hours'}];
+var ai=0,ab=$('atabs'),ar=$('arule'),al=$('alog'),abusy=false;
+function asay(t,c){var d=document.createElement('div');if(c)d.className=c;d.textContent=t;al.appendChild(d);al.scrollTop=al.scrollHeight}
+function apick(i){ai=i;Array.prototype.forEach.call(ab.children,function(t,j){t.setAttribute('aria-selected',j===i)});var a=AL[i];
+ar.textContent='alert: '+a.n.replace(/ /g,'')+'\nexpr:  '+a.x+'\nfor:   '+a.f+'\nlabels: severity='+a.sev}
+AL.forEach(function(a,i){var t=document.createElement('button');t.className='tab';t.textContent=a.n;t.onclick=function(){if(!abusy)apick(i)};ab.appendChild(t)});
+apick(0);
+$('arun').onclick=async function(){if(abusy)return;abusy=true;this.disabled=true;al.innerHTML='';var a=AL[ai];
+asay('$ condition met: '+a.ev,'w');await sleep(700);
+asay('Prometheus: state PENDING (waiting '+a.f+' to avoid false alarms)');await sleep(900);
+asay('Prometheus: state FIRING, sending to Alertmanager','bad');await sleep(800);
+asay('Alertmanager: grouped by alertname and instance');await sleep(700);
+asay('Alertmanager: severity='+a.sev+', routed to '+a.to,'ok');await sleep(700);
+if(a.sev==='critical'){asay('Inhibit rule: warning alerts for the same instance are muted');await sleep(700)}
+asay('... problem fixed, condition cleared','w');await sleep(900);
+asay('Prometheus: state RESOLVED, resolved notification sent','ok');
+abusy=false;this.disabled=false};
+/* terminal */
+var to=$('tout'),ti=$('tin'),hist=[],hp=0;
+function pr(t,c){var d=document.createElement('div');if(c)d.className=c;d.textContent=t;to.appendChild(d);to.scrollTop=to.scrollHeight}
+var C={
+help:function(){return[['Commands:','w'],'whoami  skills  experience  projects','kubectl get pods   docker ps   argocd app sync','terraform plan   promtool check rules','uptime  hire  clear']},
+whoami:function(){return[['Gaurav Kumar, DevOps Engineer, Bengaluru','ok'],'2+ years of CI/CD, containers and monitoring for an AI-driven revenue assurance platform.']},
+skills:function(){return['CI/CD: GitHub Actions, Jenkins, ArgoCD','Containers: Docker, Kubernetes, Nginx','Cloud: AWS EC2, ECR, IAM, S3, VPC, OIDC','Monitoring: Grafana  |  Scripting: Python, Bash, Java']},
+experience:function(){return['Jan 2024 - now  Synthesis-Systems  DevOps & Automation Engineer','Oct 2023 - Jan 2024  MountBlue  SDE Trainee']},
+projects:function(){return['1. Realtime Chat & Threads: CI/CD on AWS (GitHub Actions, ECR, EC2, Trivy)','2. Autonomous multi-engine AI data agent (n8n, LLM, Spark, PostgreSQL)']},
+'kubectl get pods':function(){return[['NAME                     READY  STATUS   RESTARTS  AGE','u'],'frontend-nextjs-7d9f     1/1    Running  0         12d','api-node-5c8b           1/1    Running  0         12d','ai-python-6f4a          1/1    Running  0         12d','nginx-proxy-9b2c        1/1    Running  0         12d',['gaurav-open-to-work     1/1    Running  0         ready to join','ok']]},
+'docker ps':function(){return[['CONTAINER   IMAGE                 STATUS','u'],'a1b2c3d     chat-web:a1b2c3d      Up (healthy)','e4f5a6b     chat-api:a1b2c3d      Up (healthy)','c7d8e9f     chat-ai:a1b2c3d       Up (healthy)','0a1b2c3     nginx:stable          Up (healthy)']},
+'argocd app sync':function(){return['Comparing Git (desired) with cluster (live)...',['Syncing 4 resources... done','w'],['Application is Synced and Healthy. Rollback is one git revert away.','ok']]},
+'terraform plan':function(){return[['Terraform will perform the following actions:','u'],'  + aws_vpc.main','  + aws_subnet.public','  + aws_security_group.monitoring (admin IP only)','  + aws_instance.monitoring (IMDSv2, encrypted disk)',['Plan: 7 to add, 0 to change, 0 to destroy.','ok']]},
+'promtool check rules':function(){return['Checking alert.rules.yml',['  SUCCESS: 4 rules found','ok'],'Alerts: InstanceDown, HighCpuUsage, HighMemoryUsage, DiskWillFillIn4Hours']},
+uptime:function(){return[['Status: open to DevOps and cloud roles','ok'],'Preferred reply channel: email']},
+hire:function(){setTimeout(function(){location.href='mailto:gaurav.kumarit8@gmail.com?subject=Let%27s%20talk%20DevOps'},600);return[['Great choice. Opening your email client...','ok'],'If nothing opens, write to gaurav.kumarit8@gmail.com']},
+clear:function(){to.innerHTML='';return[]}};
+function runCmd(v){v=v.trim().toLowerCase();if(!v)return;pr('$ '+v,'w');hist.push(v);hp=hist.length;
+var f=C[v];if(!f){pr('command not found: '+v+'. Type help.','bad');return}
+f().forEach(function(l){Array.isArray(l)?pr(l[0],l[1]):pr(l)})}
+ti.addEventListener('keydown',function(e){if(e.key==='Enter'){runCmd(ti.value);ti.value=''}
+else if(e.key==='ArrowUp'&&hp>0){hp--;ti.value=hist[hp];e.preventDefault()}
+else if(e.key==='ArrowDown'){hp=Math.min(hp+1,hist.length);ti.value=hist[hp]||''}});
+['help','whoami','kubectl get pods','terraform plan','promtool check rules','argocd app sync','hire'].forEach(function(k){var x=document.createElement('button');x.className='chip';x.textContent=k;x.style.cursor='pointer';x.style.color='inherit';
+x.onclick=function(){runCmd(k)};$('sugg').appendChild(x)});
+pr('Welcome. This is a tiny simulated shell. Type help to start.','ok');
+/* copy */
+$('copy').onclick=function(){var t=this;var done=function(){t.textContent='Copied';setTimeout(function(){t.textContent='Copy email'},1600)};
+try{navigator.clipboard.writeText('gaurav.kumarit8@gmail.com').then(done,done)}catch(e){done()}};
+})();
+</script>
+</body>
+</html>

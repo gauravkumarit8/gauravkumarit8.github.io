@@ -1,0 +1,26 @@
+route:
+  receiver: slack-alerts
+  group_by: [alertname, instance]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  routes:
+    - matchers: ['severity="critical"']
+      receiver: oncall-webhook
+
+receivers:
+  - name: slack-alerts
+    slack_configs:
+      - api_url: "https://hooks.slack.com/services/REPLACE_ME"
+        channel: "#alerts"
+        send_resolved: true
+  - name: oncall-webhook
+    webhook_configs:
+      - url: "http://REPLACE_ME:5001/alert"
+        send_resolved: true
+
+# A critical alert mutes warnings for the same instance.
+inhibit_rules:
+  - source_matchers: ['severity="critical"']
+    target_matchers: ['severity="warning"']
+    equal: [instance]
